@@ -15,7 +15,7 @@ public class StockWrapper {
     private final Stock stock;
     private final LocalDateTime lastAccessed;
 
-    public StockWrapper(final Stock stock) {
+    public StockWrapper(Stock stock) {
         this.stock = stock;
         this.lastAccessed = LocalDateTime.now();
     }

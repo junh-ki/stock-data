@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+
 @SpringBootTest
 public class StockServiceTest {
 
@@ -20,9 +23,11 @@ public class StockServiceTest {
     private StockService stockService;
 
     @Test
-    public void invoke() {
-        final StockWrapper stock = stockService.findStock("UU.L");
+    public void invoke() throws IOException {
+        StockWrapper stock = stockService.findStock("UU.L");
         logger.info(stock.getStock().toString());
+        BigDecimal price = stockService.findPrice(stock);
+        logger.info(price.toString());
     }
 
 }

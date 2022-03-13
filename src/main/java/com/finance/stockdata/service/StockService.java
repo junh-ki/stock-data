@@ -20,7 +20,7 @@ public class StockService {
         logger = LoggerFactory.getLogger(StockService.class);
     }
 
-    public StockWrapper findStock(final String ticker) {
+    public StockWrapper findStock(String ticker) {
         try {
             return new StockWrapper(YahooFinance.get(ticker));
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class StockService {
         return null;
     }
 
-    public BigDecimal findPrice(final StockWrapper stock) throws IOException {
+    public BigDecimal findPrice(StockWrapper stock) throws IOException {
         return stock.getStock().getQuote(true).getPrice();
     }
 
