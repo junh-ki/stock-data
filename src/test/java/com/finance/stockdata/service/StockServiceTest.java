@@ -1,9 +1,9 @@
 package com.finance.stockdata.service;
 
+import com.finance.commons.enums.LoggerEnum;
+import com.finance.commons.logger.Logger;
 import com.finance.stockdata.model.StockWrapper;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,21 +13,15 @@ import java.math.BigDecimal;
 @SpringBootTest
 public class StockServiceTest {
 
-    private static final Logger logger;
-
-    static {
-        logger = LoggerFactory.getLogger(StockServiceTest.class);
-    }
-
     @Autowired
     private StockService stockService;
 
     @Test
     public void invoke() throws IOException {
         StockWrapper stock = stockService.findStock("UU.L");
-        logger.info(stock.getStock().toString());
+        Logger.info(LoggerEnum.STOCK_DATA_SERVICE, stock.getStock().toString());
         BigDecimal price = stockService.findPrice(stock);
-        logger.info(price.toString());
+        Logger.info(LoggerEnum.STOCK_DATA_SERVICE, price.toString());
     }
 
 }

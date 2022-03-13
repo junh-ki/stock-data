@@ -1,9 +1,9 @@
 package com.finance.stockdata.service;
 
+import com.finance.commons.enums.LoggerEnum;
+import com.finance.commons.logger.Logger;
 import com.finance.stockdata.model.StockWrapper;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import yahoofinance.YahooFinance;
 
@@ -14,17 +14,11 @@ import java.math.BigDecimal;
 @Service
 public class StockService {
 
-    private static final Logger logger;
-
-    static {
-        logger = LoggerFactory.getLogger(StockService.class);
-    }
-
     public StockWrapper findStock(String ticker) {
         try {
             return new StockWrapper(YahooFinance.get(ticker));
         } catch (Exception e) {
-            logger.error("Error");
+            Logger.error(LoggerEnum.STOCK_DATA_SERVICE, "Error", e);
         }
         return null;
     }
