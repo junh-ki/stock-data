@@ -17,11 +17,11 @@ import java.util.concurrent.TimeUnit;
 public class RefreshService {
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    private static final Duration refreshPeriod = Duration.ofSeconds(15);
+    private static final Duration refreshPeriod = Duration.ofSeconds(5);
     private final Map<StockWrapper, Boolean> stocksToRefresh = new HashMap<>();
 
     public RefreshService() {
-        setRefreshEvery15Seconds();
+        setRefreshEvery5Seconds();
     }
 
     public boolean shouldRefresh(StockWrapper stock) {
@@ -32,14 +32,14 @@ public class RefreshService {
         return stocksToRefresh.get(stock);
     }
 
-    private void setRefreshEvery15Seconds() {
+    private void setRefreshEvery5Seconds() {
         scheduler.scheduleAtFixedRate(() -> stocksToRefresh.forEach((stock, value) -> {
             if (stock.getLastAccessed().isBefore(LocalDateTime.now().minus(refreshPeriod))) {
                 Logger.info(LoggerEnum.REFRESH_SERVICE, "Setting should refresh " + stock.getStock().getSymbol());
                 stocksToRefresh.remove(stock);
                 stocksToRefresh.put(stock.withLastAccessed(LocalDateTime.now()), true);
             }
-        }), 0, 15, TimeUnit.SECONDS);
+        }), 0, 5, TimeUnit.SECONDS);
     }
 
 }
