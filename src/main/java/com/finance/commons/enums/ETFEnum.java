@@ -154,7 +154,7 @@ public enum ETFEnum {
     MTUM("MTUM", ""),
     EWH("EWH", ""),
     EZU("EZU", ""),
-    XDJP_L("XDJP_L", ""),
+    XDJP_L("XDJP.L", ""),
     IWN("IWN", ""),
     UDOW("UDOW", ""),
     TNA("TNA", ""),
