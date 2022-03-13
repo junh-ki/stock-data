@@ -1,5 +1,6 @@
 package com.finance.stockdata.service;
 
+import com.finance.commons.enums.ETFEnum;
 import com.finance.commons.enums.LoggerEnum;
 import com.finance.commons.logger.Logger;
 import com.finance.stockdata.model.StockWrapper;
@@ -32,7 +33,8 @@ public class StockServiceTest {
 
     @Test
     public void multiple() throws InterruptedException {
-        List<StockWrapper> stocks = stockService.findStocks(Arrays.asList("GOOG", "AMZN"));
+        List<StockWrapper> stocks = stockService.findStocks(Arrays.asList(ETFEnum.QQQ.getSymbol(), ETFEnum.VUG.getSymbol(),
+                ETFEnum.DIA.getSymbol(), ETFEnum.SPY.getSymbol(), ETFEnum.SOXX.getSymbol(), ETFEnum.LIT.getSymbol()));
         findPrices(stocks);
         Thread.sleep(20000);
         //StockWrapper aa = stockService.findStock("AA.L");
