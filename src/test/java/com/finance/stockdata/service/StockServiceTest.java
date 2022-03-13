@@ -19,9 +19,9 @@ public class StockServiceTest {
     @Test
     public void invoke() throws IOException {
         StockWrapper stock = stockService.findStock("UU.L");
-        Logger.info(LoggerEnum.STOCK_DATA_SERVICE, stock.getStock().toString());
+        Logger.info(LoggerEnum.STOCK_DATA_TEST, stock.getStock().toString());
         BigDecimal price = stockService.findPrice(stock);
-        Logger.info(LoggerEnum.STOCK_DATA_SERVICE, price.toString());
+        Logger.info(LoggerEnum.STOCK_DATA_TEST, price.toString());
     }
 
 }
