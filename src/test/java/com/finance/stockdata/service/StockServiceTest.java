@@ -7,11 +7,13 @@ import com.finance.stockdata.model.StockWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import yahoofinance.Stock;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 public class StockServiceTest {
@@ -41,6 +43,16 @@ public class StockServiceTest {
         //stocks.add(aa);
         //Logger.info(LoggerEnum.STOCK_DATA_TEST, stockService.findPrice(aa).toString());
         findPrices(stocks);
+    }
+
+    @Test
+    public void multipleToMap() {
+        Map<String, Stock> stocks = stockService.getStocks(Arrays.asList(ETFEnum.QQQ.getSymbol(), ETFEnum.VUG.getSymbol(),
+                ETFEnum.DIA.getSymbol(), ETFEnum.SPY.getSymbol(), ETFEnum.SOXX.getSymbol(), ETFEnum.LIT.getSymbol()));
+        for (String key : stocks.keySet()) {
+            Logger.info(LoggerEnum.STOCK_DATA_TEST, "Key: " + key);
+            Logger.info(LoggerEnum.STOCK_DATA_TEST, "Price: " + stocks.get(key).getQuote().getPrice());
+        }
     }
 
     private void findPrices(List<StockWrapper> stocks) {

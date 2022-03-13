@@ -6,6 +6,7 @@ import lombok.With;
 import yahoofinance.Stock;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Getter
 @With

@@ -5,11 +5,13 @@ import com.finance.commons.logger.Logger;
 import com.finance.stockdata.model.StockWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -22,6 +24,15 @@ public class StockService {
     public StockWrapper findStock(String ticker) {
         try {
             return new StockWrapper(YahooFinance.get(ticker));
+        } catch (Exception e) {
+            Logger.error(LoggerEnum.STOCK_DATA_SERVICE, "Error", e);
+        }
+        return null;
+    }
+
+    public Map<String, Stock> getStocks(List<String> tickers) {
+        try {
+            return YahooFinance.get(tickers.toArray(new String[0]));
         } catch (Exception e) {
             Logger.error(LoggerEnum.STOCK_DATA_SERVICE, "Error", e);
         }
